@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+<style src="css/c.css"></style>
+
+    <script src="js/vue.js"></script>
+    <title>vue.js</title>
+  </head>
+  <body>
+
+
+<div id="me">
+    <div>{{count}}</div>
+    <button @click="count+= 8">add</button>
+    <button @click="count--">add</button>
+  </div>
+
+    <div class="container">
+      <div id="application">
+        <input type="checkbox" v-model="success">
+          <p>The value of the input is: {{message  }}</p>
+        <input type="text" v-model="message"><p>v-bind</p>
+        <p>The value of the input is: {{message  }}</p>
+          <sad></sad>
+      </div>
+    </div>
+
+    <div id="app">
+
+      <label>serch</label>
+      <input type="text" v-model="find">
+      <ul>
+        <li v-for=" langage in filterlang">
+          {{langage}}
+
+        </li>
+      </ul>
+
+<p>your name is {{name}}</p>
+<p v-text="name"></p>
+<p>{{age}}</p>
+<p>{{skills[1]}}</p>
+<p>{{comp[1].test}}</p>
+<p>{{say()}}<p>
+  <p>{{day}}<p>
+
+    <ul>
+       <li v-for="test and coulor">
+         {{test}} | {{te}}
+       </li>
+    </ul>
+    <button @click="showday">show day</button>
+
+
+
+<p v-if="age > 50">you are to old </p>
+<p v-else-if="age > 12 && age < 40">you are not old </p>
+<p v-else>still young</p>
+        </div>
+
+        <div id="med">
+          <input  v-model="f">
+          <input  v-model="n">
+          <button @click="add">dddd</button>
+</br>
+<ul>
+  <li>
+          {{last}}
+        </li>
+        </ul>
+          </div>
+<script>
+new Vue({
+  el:'#med',
+  data:{
+    f:'',
+    n:''
+  },
+  computed:{
+    last: function(){
+      return this.f +'  '+this.n
+    }
+  }
+})
+</script>
+    <script>
+        var vm =  new Vue({
+        el: '#app',
+        data: { name: 'ossama',
+              age: 47,
+              day:'monnday',
+              skills:['html','css','java'],
+              comp:[{test:'red',te: '8'},{test: 'yellow',te: '5'}],
+              find:'',
+              langage:['html','css','java','python','c++'],
+},
+computed:{
+    filterlang:function(){
+      var filtering =new RegExp(this.find,'i');
+      return this.langage.filter(function(el) {
+        return el.match(filtering);
+      })
+    }
+},
+methods:{
+  say:function(){
+    return 'age in day' + this.age*365;
+},
+
+showday:function(){
+  this.day=Date();
+},
+
+  color : function (){
+    this.success = false
+
+    }
+  }
+      })
+    </script>
+
+    <script>
+      new Vue({
+    el: '#me',
+    data: { count: 0
+  }});
+    </script>
+    <script>
+      let data = {
+        message: 'Hello World'
+      }
+
+      new Vue({
+        el: '#application',
+        data: data,
+        success : true
+      })
+      vue.component('sad ',{
+        data:function (){
+          return{
+            name:'ahmed',
+            count:1,
+          }
+        },
+        template :'<p @click="count++">gello{{name}}vount is {{count}}</p>'
+      })
+    </script>
+
+
+
+    <div id="like">
+    <div @click="liked =! liked":classe="classename">{{likes}} like </div>
+    </div>
+<script>
+new Vue({
+  el:'#like',
+  data:{
+    liked:false,
+    likes:5
+  },
+  computed:{
+  classename:function(){
+    return(this.liked)? 'liked' : '';  },
+},
+watch:{
+  liked: function(value){
+    if (value)
+    this.likes++;
+    else
+    this.likes--;
+  }}});
+</script>
+
+<div id="sizee">
+  <div :style="[texte,{'font-size':size+'px'}]">my ==texte</div>
+  <button @click="size++">+++</button>
+  <button @click="size--">---</button>
+</div>
+<script>
+new Vue({
+  el:'#sizee',
+  data:{
+    texte:'color:blue',
+    size:30
+
+  }
+})
+
+</script>
+
+
+  </body>
+</html>
